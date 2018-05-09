@@ -1,5 +1,7 @@
 const moment = require('moment');
 
+const _getTimestamp = () => moment.format();
+
 export default function () {
   return {
     noColors: false,
@@ -14,7 +16,7 @@ export default function () {
 
       this.setIndent(1)
         .useWordWrap(true)
-        .write(this.chalk.bold(moment.utc().format()))
+        .write(this.chalk.bold(_getTimestamp()))
         .write(this.chalk.bold('Running tests in:'))
         .newline();
 
@@ -34,7 +36,7 @@ export default function () {
       } else {
         this.newline();
       }
-      this.write(this.chalk.bold(moment.utc().format()))
+      this.write(this.chalk.bold(_getTimestamp()))
         .write(name)
         .newline();
     },
@@ -55,7 +57,7 @@ export default function () {
 
     reportTestDone(name, testRunInfo) {
       const hasErr = !!testRunInfo.errs.length;
-      const now = moment.utc().format();
+      const now = _getTimestamp();
       let symbol = null;
       let nameStyle = null;
 
@@ -97,7 +99,7 @@ export default function () {
 
     _renderWarnings(warnings) {
       this.newline()
-        .write(this.chalk.bold(moment.utc().format()))
+        .write(this.chalk.bold(_getTimestamp()))
         .setIndent(1)
         .write(this.chalk.bold.yellow(`Warnings (${warnings.length}):`))
         .newline();
@@ -124,7 +126,7 @@ export default function () {
       if (!this.afterErrorList) {
         this.newline();
       }
-      this.write(this.chalk.bold(moment.utc().format()))
+      this.write(this.chalk.bold(_getTimestamp()))
         .setIndent(1)
         .useWordWrap(true);
 
